@@ -1,55 +1,78 @@
-import { useLogin } from "@refinedev/core";
 import { useEffect, useRef } from "react";
+import { useLogin } from "@refinedev/core";
+import { Container, Box } from "@mui/material";
+
+import { hotelhive } from "../assets";
+
 import { CredentialResponse } from "../interfaces/google";
 
-// Todo: Update your Google Client ID here
-const GOOGLE_CLIENT_ID =
-  "1041339102270-jlljcjl19jo1hkgf695em3ibr7q2m734.apps.googleusercontent.com";
-
 export const Login: React.FC = () => {
-  const { mutate: login } = useLogin<CredentialResponse>();
+    const { mutate: login } = useLogin<CredentialResponse>();
+  
+    const GoogleButton = (): JSX.Element => {
+      const divRef = useRef<HTMLDivElement>(null);
+  
+      useEffect(() => {
+        if (typeof window === "undefined" || !window.google || !divRef.current) {
+          return;
+        }
+  
+        try {
+          window.google.accounts.id.initialize({
+            ux_mode: "popup",
+            client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+            callback: async (res: CredentialResponse) => {
+              if (res.credential) {
+                login(res);
+              }
+            },
+          });
+          window.google.accounts.id.renderButton(divRef.current, {
+            theme: "filled_black",
+            size: "medium",
+            type: "standard",
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }, []);
+  
+      return <div ref={divRef} />;
+    };
 
-  const GoogleButton = (): JSX.Element => {
-    const divRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-      if (typeof window === "undefined" || !window.google || !divRef.current) {
-        return;
-      }
-
-      try {
-        window.google.accounts.id.initialize({
-          ux_mode: "popup",
-          client_id: GOOGLE_CLIENT_ID,
-          callback: async (res: CredentialResponse) => {
-            if (res.credential) {
-              login(res);
-            }
-          },
-        });
-        window.google.accounts.id.renderButton(divRef.current, {
-          theme: "filled_blue",
-          size: "medium",
-          type: "standard",
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    }, []);
-
-    return <div ref={divRef} />;
-  };
-
-  return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <GoogleButton />
-    </div>
-  );
+    return (
+        <Box component="div" sx={{ 
+          background: "radial-gradient(circle, rgba(136,221,192,1) 35%, rgba(49,111,180,1) 100%)", overflowX:'hidden' }}>
+            <Container
+                component="main"
+                maxWidth="xs"
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    height: "100vh",
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexDirection: "column",
+                        alignItems: "center",
+                    }}
+                >
+                    <div>
+                        <img style={{width:"2000px", height:"200px", marginBottom:"=1000px"}} src={hotelhive} alt="Hotelhive Logo" />
+                    </div>
+                   <Box mt={4}>
+                    <GoogleButton/>
+                    </Box>
+                    
+                    
+                        
+                    
+                </Box>
+            </Container>
+        </Box>
+    );
 };

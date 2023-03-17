@@ -1,44 +1,44 @@
-import {
-  AuthBindings,
-  Authenticated,
-  GitHubBanner,
-  Refine,
-} from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import React from "react";
 
+import { Refine, AuthProvider } from "@pankod/refine-core";
 import {
-  ErrorComponent,
-  Layout,
-  RefineSnackbarProvider,
   notificationProvider,
-} from "@refinedev/mui";
+  RefineSnackbarProvider,
+  CssBaseline,
+  GlobalStyles,
+  ReadyPage,
+  ErrorComponent,
+} from "@pankod/refine-mui";
 
-import { CssBaseline, GlobalStyles } from "@mui/material";
-import routerBindings, {
-  CatchAllNavigate,
-  NavigateToResource,
-  UnsavedChangesNotifier,
-} from "@refinedev/react-router-v6";
-import dataProvider from "@refinedev/simple-rest";
+import{
+  AccountCircleOutlined,
+  ChatBubbleOutline,
+  PeopleAltOutlined,
+  StarOutlineRounded,
+  VillaOutlined,
+} from '@mui/icons-material';
+
+import dataProvider from "@pankod/refine-simple-rest";
+import { MuiInferencer } from "@pankod/refine-inferencer/mui";
+import routerProvider from "@pankod/refine-react-router-v6";
 import axios, { AxiosRequestConfig } from "axios";
+import { ColorModeContextProvider } from "contexts";
+import { Title, Sider, Layout, Header } from "components/layout";
 import { CredentialResponse } from "interfaces/google";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "pages/categories";
-import { Login } from "pages/login";
-import {
-  ProductCreate,
-  ProductEdit,
-  ProductList,
-  ProductShow,
-} from "pages/products";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { parseJwt } from "utils/parse-jwt";
-import { Header } from "./components/header";
-import { ColorModeContextProvider } from "./contexts/color-mode";
+
+import { 
+  Login,
+  Home,
+  Agents,
+  MyProfile,
+  PropertyDetails,
+  AllProperties,
+  CreateProperty,
+  AgentProfile,
+  EditProperty,
+} from "pages";
+
 
 const axiosInstance = axios.create();
 axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -55,8 +55,8 @@ axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
 });
 
 function App() {
-  const authProvider: AuthBindings = {
-    login: async ({ credential }: CredentialResponse) => {
+  const authProvider: AuthProvider = {
+    login: ({ credential }: CredentialResponse) => {
       const profileObj = credential ? parseJwt(credential) : null;
 
       if (profileObj) {
@@ -67,20 +67,13 @@ function App() {
             avatar: profileObj.picture,
           })
         );
-
-        localStorage.setItem("token", `${credential}`);
-
-        return {
-          success: true,
-          redirectTo: "/",
-        };
       }
 
-      return {
-        success: false,
-      };
+      localStorage.setItem("token", `${credential}`);
+
+      return Promise.resolve();
     },
-    logout: async () => {
+    logout: () => {
       const token = localStorage.getItem("token");
 
       if (token && typeof window !== "undefined") {
@@ -88,142 +81,84 @@ function App() {
         localStorage.removeItem("user");
         axios.defaults.headers.common = {};
         window.google?.accounts.id.revoke(token, () => {
-          return {};
+          return Promise.resolve();
         });
       }
 
-      return {
-        success: true,
-        redirectTo: "/login",
-      };
+      return Promise.resolve();
     },
-    onError: async (error) => {
-      console.error(error);
-      return { error };
-    },
-    check: async () => {
+    checkError: () => Promise.resolve(),
+    checkAuth: async () => {
       const token = localStorage.getItem("token");
 
       if (token) {
-        return {
-          authenticated: true,
-        };
+        return Promise.resolve();
       }
-
-      return {
-        authenticated: false,
-        error: new Error("Not authenticated"),
-        logout: true,
-        redirectTo: "/login",
-      };
+      return Promise.reject();
     },
-    getPermissions: async () => null,
-    getIdentity: async () => {
+
+    getPermissions: () => Promise.resolve(),
+    getUserIdentity: async () => {
       const user = localStorage.getItem("user");
       if (user) {
-        return JSON.parse(user);
+        return Promise.resolve(JSON.parse(user));
       }
-
-      return null;
     },
   };
 
   return (
-    <BrowserRouter>
-      <GitHubBanner />
-      <RefineKbarProvider>
-        <ColorModeContextProvider>
-          <CssBaseline />
-          <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
-          <RefineSnackbarProvider>
-            <Refine
-              resources={[
-                {
-                  name: "products",
-                  list: "/products",
-                  create: "/products/create",
-                  edit: "/products/edit/:id",
-                  show: "/products/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-                {
-                  name: "categories",
-                  list: "/categories",
-                  create: "/categories/create",
-                  edit: "/categories/edit/:id",
-                  show: "/categories/show/:id",
-                  meta: {
-                    canDelete: true,
-                  },
-                },
-              ]}
-              dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
-              notificationProvider={notificationProvider}
-              routerProvider={routerBindings}
-              authProvider={authProvider}
-              options={{
-                syncWithLocation: true,
-                warnWhenUnsavedChanges: true,
-              }}
-            >
-              <Routes>
-                <Route
-                  element={
-                    <Authenticated fallback={<CatchAllNavigate to="/login" />}>
-                      <Layout Header={Header}>
-                        <Outlet />
-                      </Layout>
-                    </Authenticated>
-                  }
-                >
-                  <Route
-                    index
-                    element={<NavigateToResource resource="products" />}
-                  />
-                  <Route path="/products">
-                    <Route index element={<ProductList />} />
-                    <Route path="create" element={<ProductCreate />} />
-                    <Route path="edit/:id" element={<ProductEdit />} />
-                    <Route path="show/:id" element={<ProductShow />} />
-                  </Route>
-                  <Route path="/categories">
-                    <Route index element={<CategoryList />} />
-                    <Route path="create" element={<CategoryCreate />} />
-                    <Route path="edit/:id" element={<CategoryEdit />} />
-                    <Route path="show/:id" element={<CategoryShow />} />
-                  </Route>
-                </Route>
-                <Route
-                  element={
-                    <Authenticated fallback={<Outlet />}>
-                      <NavigateToResource />
-                    </Authenticated>
-                  }
-                >
-                  <Route path="/login" element={<Login />} />
-                </Route>
-                <Route
-                  element={
-                    <Authenticated>
-                      <Layout Header={Header}>
-                        <Outlet />
-                      </Layout>
-                    </Authenticated>
-                  }
-                >
-                  <Route path="*" element={<ErrorComponent />} />
-                </Route>
-              </Routes>
-
-              <RefineKbar />
-              <UnsavedChangesNotifier />
-            </Refine>
-          </RefineSnackbarProvider>
-        </ColorModeContextProvider>
-      </RefineKbarProvider>
-    </BrowserRouter>
+    <ColorModeContextProvider>
+      <CssBaseline />
+      <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
+      <RefineSnackbarProvider>
+        <Refine
+          dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+          notificationProvider={notificationProvider}
+          ReadyPage={ReadyPage}
+          catchAll={<ErrorComponent />}
+          resources={[
+            {
+              name: "properties",
+              list:AllProperties,
+              show:PropertyDetails,
+              create:CreateProperty,
+              edit:EditProperty,
+              icon: <VillaOutlined></VillaOutlined>
+            },
+            {
+              name: "agents",
+              list:Agents,
+              show:AgentProfile,
+              icon: <PeopleAltOutlined></PeopleAltOutlined>
+            },
+            {
+              name: "reviews",
+              list:Home,
+              icon: <StarOutlineRounded></StarOutlineRounded>
+            },
+            {
+              name: "messages",
+              list:Home,
+              icon: <ChatBubbleOutline></ChatBubbleOutline>
+            },
+            {
+              name: "my-profile",
+              options:{ label: 'My profile'},
+              list:MyProfile,
+              icon: <AccountCircleOutlined></AccountCircleOutlined>
+            },
+          ]}
+          Title={Title}
+          Sider={Sider}
+          Layout={Layout}
+          Header={Header}
+          routerProvider={routerProvider}
+          authProvider={authProvider}
+          LoginPage={Login}
+          DashboardPage={Home}
+        />
+      </RefineSnackbarProvider>
+    </ColorModeContextProvider>
   );
 }
 

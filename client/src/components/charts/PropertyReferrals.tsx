@@ -29,7 +29,7 @@ const ProgressBar = ({title, percentage, color} : ProgressBarProps) => (
 )
 
 
-const PropertyReferrals = () => {
+const propertyReferrals = () => {
   return (
     <Box
       p={4}
@@ -52,4 +52,4 @@ const PropertyReferrals = () => {
   )
 }
 
-export default PropertyReferrals
+export default propertyReferrals

@@ -7,7 +7,10 @@ import { Login } from './login';
 import MyProfile from './my-profile';
 import PropertyDetails from './property-details';
 import EditProperty from './edit-property';
+import AboutUs from './about-us';
 
+//predstavlja izvoz svih komponenti koje se koriste u aplikaciji. Svaka od ovih komponenti se uvozi iz svog odgovarajućeg fajla
+// i nakon toga se izvozi na korišćenje drugim delovima aplikacije.
 export {
   AgentProfile,
   Agents,
@@ -18,4 +21,6 @@ export {
   MyProfile,
   PropertyDetails,
   EditProperty,
+  AboutUs,
+  
 };

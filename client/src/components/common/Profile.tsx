@@ -26,7 +26,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                 }}
             >
                 <img
-                    src="https://img.freepik.com/premium-vector/agent-holding-home-key-hand-mortage-deal-with-real-estate-rent-property_284092-2384.jpg?w=360"
+                    src="https://i.postimg.cc/9fCvxGfD/Screenshot-1.png"
                     width={340}
                     height={320}
                     alt="abstract"
@@ -73,7 +73,7 @@ const Profile = ({ type, name, avatar, email, properties }: ProfileProps) => (
                                     {name}
                                 </Typography>
                                 <Typography fontSize={16} color="#808191">
-                                    Realestate Agent
+                                    Booking Agent
                                 </Typography>
                             </Stack>
 

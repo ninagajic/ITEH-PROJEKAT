@@ -21,7 +21,7 @@ const AboutUs = () => {
             >
                 <Box flex={1} maxWidth={1600} >
                     <img
-                        src='https://www.peoplespropertypoint.com/wp-content/uploads/2022/09/Top-10-property-dealers-in-Mohali.jpg'
+                        src='https://images.pexels.com/photos/189296/pexels-photo-189296.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
                         alt="property_details-img"
                         height={700}
                         width={1600}
@@ -54,14 +54,16 @@ const AboutUs = () => {
 
                             <Stack mt="25px" direction="column" gap="10px">
                             <Typography fontSize={18} color="#11142D" textAlign="justify" padding="10px">
-                            The real estate agency HOMENOW is dedicated to providing quality services to its clients. With a team of 
-                            experienced and knowledgeable professionals, they are committed to helping people find their dream home. 
-                            Whether it's a house, studio, apartment, condo, farmhouse, or villa, the agency has a wide selection of 
-                            properties to choose from. The team works closely with clients to understand their unique needs and 
-                            preferences and offers personalized recommendations to ensure that they find the perfect home. The agency's 
-                            mission is to make the home buying process as easy and stress-free as possible for its clients, from the 
-                            initial search to closing the deal. With a reputation for excellence and a commitment to customer satisfaction, 
-                            the agency is a trusted partner in the real estate market.
+                            HotelHive is a hotel booking company that specializes in providing travelers 
+                            with unique and personalized hotel experiences. Their platform offers a vast 
+                            selection of accommodations ranging from budget-friendly to luxurious, all 
+                            carefully curated to meet the needs and preferences of their customers. 
+                            HotelHive's user-friendly website and mobile app make booking and managing 
+                            reservations seamless and hassle-free. In addition, the company prides itself 
+                            on its exceptional customer service, providing support to guests around the clock. 
+                            HotelHive's commitment to providing personalized experiences, combined with their 
+                            technological prowess and outstanding customer service, has made them a popular 
+                            choice among travelers seeking memorable and stress-free hotel stays.
                             </Typography>
                             </Stack>
 

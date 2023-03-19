@@ -169,7 +169,8 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "hotels",
+              name: "properties",
+              options:{ label: 'Hotels' },
               list:AllProperties,
               show:PropertyDetails,
               create:CreateProperty,
@@ -204,7 +205,8 @@ function App() {
           catchAll={<ErrorComponent />}
           resources={[
             {
-              name: "hotels",
+              name: "properties",
+              options:{ label: 'Hotels' },
               list:AllProperties,
               show:PropertyDetails,
               create:CreateProperty,

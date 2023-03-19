@@ -11,14 +11,14 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading,
   return (
     <Box>
       <Typography fontSize={25} fontWeight={700} color="#11142d">
-        {type} a property
+        {type} a hotel
       </Typography>
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
           <form style={{marginTop: '20px', width: '100%', display: 'flex', flexDirection: 'column', gap: '20px'}}
           onSubmit={handleSubmit(onFinishHandler)}>
               <FormControl>
                   <FormHelperText
-                   sx={{fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'}}>Enter property name</FormHelperText>
+                   sx={{fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'}}>Enter hotel name</FormHelperText>
                   <TextField
                   fullWidth
                   required
@@ -50,7 +50,7 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading,
                           fontSize:16,
                           color:'#11142d'
                         }}>
-                              Select Property Type
+                              Select Hotel Type
                         </FormHelperText>
                         <Select
                           variant="outlined"
@@ -61,36 +61,30 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading,
                           defaultValue="apartment"
                           {...register('propertyType', {required:true})}
                         >
+                            <MenuItem value="hostel">
+                              Hostel
+                            </MenuItem>
+                            <MenuItem value="resort">
+                              Resort
+                            </MenuItem>
+                            <MenuItem value="bed and breakfast">
+                              Bed and Breakfast
+                            </MenuItem>
+                            <MenuItem value="all-inclusive">
+                              All-inclusive resort
+                            </MenuItem>
                             <MenuItem value="apartment">
                               Apartment
                             </MenuItem>
-                            <MenuItem value="villa">
-                              Villa
-                            </MenuItem>
-                            <MenuItem value="farmhouse">
-                              Farmhouse
-                            </MenuItem>
-                            <MenuItem value="condos">
-                              Condos
-                            </MenuItem>
-                            <MenuItem value="townhouse">
-                              Townhouse
-                            </MenuItem>
-                            <MenuItem value="duplex">
-                              Duplex
-                            </MenuItem>
-                            <MenuItem value="studio">
-                              Studio
-                            </MenuItem>
-                            <MenuItem value="chalet">
-                              Chalet
+                            <MenuItem value="boutique hotels">
+                              Boutique hotels
                             </MenuItem>
                         </Select>
                   </FormControl>
 
                   <FormControl>
                   <FormHelperText
-                   sx={{fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'}}>Enter property price</FormHelperText>
+                   sx={{fontWeight: 500, margin:'10px 0', fontSize: 16, color: '#11142d'}}>Enter hotel price</FormHelperText>
                   <TextField
                   fullWidth
                   required
@@ -119,7 +113,7 @@ const Form = ({ type, register, handleSubmit, handleImageChange, formLoading,
               <Stack direction="column" gap={1} justifyContent="center" mb={2}>
                         <Stack direction="row" gap={2}>
                             <Typography color='#1142d' fontSize={16} fontWeight={500}
-                            my="10px">Property Photo</Typography>
+                            my="10px">Hotel Photo</Typography>
                             <Button component="label" sx={{ 
                               width: 'fit-content', color:"#2ed480", textTransform:'capitalize', fontSize: 16
                             }}>Upload

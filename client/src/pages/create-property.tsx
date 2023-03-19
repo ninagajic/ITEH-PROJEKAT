@@ -34,7 +34,7 @@ const CreateProperty = () => {
 //U onFinishHandler se definise funkcija koja se poziva kada se formular za kreiranje nekretnine zavrsi. 
 //Prvo se proverava da li je korisnik dodao sliku za nekretninu. Ako nije, prikazuje se upozorenje
   const onFinishHandler = async (data:FieldValues) => {
-    if (!propertyImage.name) return alert('Please upload a property image');
+    if (!propertyImage.name) return alert('Please upload a hotel image');
     // u suprotnom poziva se onFinish funkcija i salju se podaci formulara, URL slike za nekretninu i email korisnika.
     await onFinish({ ...data, photo: propertyImage.url, email: user.email });
   };

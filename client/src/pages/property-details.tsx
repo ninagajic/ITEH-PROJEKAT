@@ -184,7 +184,7 @@ const PropertyDetails = () => {
     //se funkcija mutate() koja briše propertij. U slučaju uspešnog brisanja, korisnik se preusmerava na stranicu sa listom propertija.
     const handleDeleteProperty = () => {
         const response = confirm(
-            "Are you sure you want to delete this property?",
+            "Are you sure you want to delete this hotel?",
         );
         if (response) {
             mutate(
@@ -404,7 +404,7 @@ const PropertyDetails = () => {
                                 color="#11142D"
                             >
                                 {propertyDetails.creator.allProperties.length}{" "}
-                                Properties
+                                Hotels
                             </Typography>
                         </Stack>
 
@@ -526,7 +526,7 @@ const PropertyDetails = () => {
                             color="#FCFCFC"
                             fullWidth
                             handleClick ={ () => {
-                                alert('Property has been booked successfully!');
+                                alert('Hotel has been booked successfully!');
                               }}
                               
                         />

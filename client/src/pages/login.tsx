@@ -67,7 +67,7 @@ export const Login: React.FC = () => {
           }}
         >
           <div>
-            <img src={hotelhive} alt="Homenow Logo" />
+            <img src={hotelhive} alt="HotelHive Logo" />
           </div>
           <Box mt={4}>
             <GoogleButton />

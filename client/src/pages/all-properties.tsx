@@ -269,7 +269,7 @@ const AllProperties = () => {
                     title = {'Previous'}
                     /*racunanje trenutne stranice */
                     handleClick={() => setCurrent((prev) => prev - 1)}
-                    backgroundColor="#475be8"
+                    backgroundColor="#1B2E58"
                     color="#fcfcfc"
                     disabled={!(current>1)}
                   />
@@ -280,7 +280,7 @@ const AllProperties = () => {
                     title = {'Next'}
                     /*racunanje trenutne stranice */
                     handleClick={() => setCurrent((prev) => prev + 1)}
-                    backgroundColor="#475be8"
+                    backgroundColor="#1B2E58"
                     color="#fcfcfc"
                     disabled={current === pageCount}
                   />

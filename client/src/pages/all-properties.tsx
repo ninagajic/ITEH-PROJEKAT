@@ -260,6 +260,7 @@ const AllProperties = () => {
   
           />
         ))}
+
       </Box>
 
           {/* paginacija*/}
@@ -276,6 +277,7 @@ const AllProperties = () => {
                   <Box display={{xs:'hidden', sm:'flex'}} alignItems="center" gap="5px">
                       Page{' '}<strong>{current} of {pageCount}</strong>
                   </Box>
+
                   <CustomButton
                     title = {'Next'}
                     /*racunanje trenutne stranice */
@@ -284,6 +286,7 @@ const AllProperties = () => {
                     color="#fcfcfc"
                     disabled={current === pageCount}
                   />
+
                   <Select 
                     variant="outlined"
                     color="info"
@@ -299,6 +302,7 @@ const AllProperties = () => {
                       <MenuItem key={size} value={size}>Show {size}</MenuItem>
                     ))}
                   </Select>
+                  
               </Box>
           )}
     </Box>

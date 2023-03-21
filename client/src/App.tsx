@@ -161,6 +161,7 @@ function App() {
       <CssBaseline />
       <GlobalStyles styles={{ html: { WebkitFontSmoothing: "auto" } }} />
       <RefineSnackbarProvider>
+        
         <Refine
         //podatke daje server
           dataProvider={dataProvider("http://localhost:8080/api/v1")}

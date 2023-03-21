@@ -436,7 +436,7 @@ const PropertyDetails = () => {
                             />) : (
                                 <CustomButton
                                 title={!isCurrentUser ? "Message" : "Edit"}
-                                backgroundColor="#475BE8"
+                                backgroundColor="#1B2E58"
                                 color="#FCFCFC"
                                 fullWidth
                                 icon={

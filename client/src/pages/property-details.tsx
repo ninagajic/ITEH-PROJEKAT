@@ -299,7 +299,7 @@ const PropertyDetails = () => {
                                     <Typography
                                         fontSize={25}
                                         fontWeight={700}
-                                        color="#475BE8"
+                                        color="#1B2E58"
                                     >
                                         ${propertyDetails.price}
                                     </Typography>
@@ -522,7 +522,7 @@ const PropertyDetails = () => {
                     {isAdmin ? null : (
                         <CustomButton
                             title="Book Now"
-                            backgroundColor="#475BE8"
+                            backgroundColor="#1B2E58"
                             color="#FCFCFC"
                             fullWidth
                             handleClick ={ () => {

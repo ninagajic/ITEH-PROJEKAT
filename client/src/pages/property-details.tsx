@@ -421,7 +421,7 @@ const PropertyDetails = () => {
                                 {/*menjanje dugmeta u yavisnosti da li je admin ili ne*/}
                           {isAdmin ? (<CustomButton
                                 title={"Edit"}
-                                backgroundColor="#475BE8"
+                                backgroundColor="#1B2E58"
                                 color="#FCFCFC"
                                 fullWidth
                                 icon={

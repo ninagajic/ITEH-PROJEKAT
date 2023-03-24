@@ -216,7 +216,7 @@ const AllProperties = () => {
                     >
                       {/*padajuca lista za tip nekretnine, mapira jedan po jedan i prikazuje u meniju malim slovima*/}
                       <MenuItem value="">All</MenuItem>
-                      {['Hostel', 'Resort', 'Bed and Breakfast', 'All-inclusive resort', 'Apartment', 'Boutique hotels'].map((type) => (
+                      {['Hostel', 'Resort', 'Bed and Breakfast', 'All-inclusive', 'Apartment', 'Boutique hotels'].map((type) => (
                           <MenuItem key={type} value={type.toLowerCase()}>{type}</MenuItem>
                       ))}
                     </Select>

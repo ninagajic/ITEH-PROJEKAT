@@ -107,7 +107,7 @@ const createProperty = async (req, res) => {
     //izvrsava transakciju, promene tokom transakcije se potvrđuju.
     await session.commitTransaction();
 
-    res.status(200).json({ message: 'Property created succesfully'}) 
+    res.status(200).json({ message: 'Hotel created succesfully'}) 
 
     } catch (error) {
        res.status(500).json({message:error.message}) 
@@ -135,7 +135,7 @@ const updateProperty = async (req, res) => {
 
         })
 
-        res.status(200).json({message: 'Property updated successfully'})
+        res.status(200).json({message: 'Hotel updated successfully'})
 
     } catch (error) {
         res.status(500).json({message: error.message})
@@ -170,7 +170,7 @@ const deleteProperty = async (req, res) => {
         await propertyToDelete.creator.save({session});
         await session.commitTransaction();
 
-        res.status(200).json({message: 'Property deleted successfully'});
+        res.status(200).json({message: 'Hotel deleted successfully'});
 
     } catch (error) {
         res.status(500).json({message: error.message})

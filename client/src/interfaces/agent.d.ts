@@ -11,7 +11,7 @@ export interface AgentCardProp {
 }
 
 //InfoBarProps definiše propertije za komponentu InfoBar. 
-//Ova komponenta se koristi za prikazivanje informacija o agenciji ili o nekoj nekretnini(ikonica i ime)
+//Ova komponenta se koristi za prikazivanje informacija o agenciji ili o nekom hotelu(ikonica i ime)
 export interface InfoBarProps {
     icon: ReactNode,
     name: string

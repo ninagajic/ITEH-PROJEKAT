@@ -18,7 +18,7 @@ const CreateProperty = () => {
   const { refineCore: { onFinish, formLoading}, register, handleSubmit} = useForm();
 
 
-  //U handleImageChange se definise funkcija za promenu slike za nekretninu. 
+  //U handleImageChange se definise funkcija za promenu slike za hotel. 
   //Ova funkcija prima fajl kao argument, zatim se kreira novi Promise koji koristi FileReader API kako bi se 
   //pretvorio fajl u Data URL, nakon cega se stanje propertyImage azurira sa novim imenom i URL-om.
   const handleImageChange = (file: File) => {
@@ -31,11 +31,11 @@ const CreateProperty = () => {
     reader(file).then((result: string) => setPropertyImage({ name: file?.name, url: result }));
   };
 
-//U onFinishHandler se definise funkcija koja se poziva kada se formular za kreiranje nekretnine zavrsi. 
-//Prvo se proverava da li je korisnik dodao sliku za nekretninu. Ako nije, prikazuje se upozorenje
+//U onFinishHandler se definise funkcija koja se poziva kada se formular za kreiranje hotela zavrsi. 
+//Prvo se proverava da li je korisnik dodao sliku za hotel. Ako nije, prikazuje se upozorenje
   const onFinishHandler = async (data:FieldValues) => {
     if (!propertyImage.name) return alert('Please upload a hotel image');
-    // u suprotnom poziva se onFinish funkcija i salju se podaci formulara, URL slike za nekretninu i email korisnika.
+    // u suprotnom poziva se onFinish funkcija i salju se podaci formulara, URL slike za hotel i email korisnika.
     await onFinish({ ...data, photo: propertyImage.url, email: user.email });
   };
 

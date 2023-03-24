@@ -15,7 +15,7 @@ import{
  
 
 const Home = () => {
-    {/*za vracanje propertija koristimo ovu kuku */}
+    {/*za vracanje hotela koristimo ovu kuku */}
     const {data, isLoading, isError} = useList({
         resource:'properties',
         config: {
